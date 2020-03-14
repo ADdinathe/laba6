@@ -22,8 +22,8 @@ using std::to_string;
 using std::rand;
 #define IDEAL ("0000");
 
-static const int SIZE_ROTATION (5*1024*1024);
-static const int ZERO (0);
+static const int SIZE_ROTATION(5*1024*1024);
+static const int ZERO(0);
 void init_logs() {
     auto log = boost::log::add_file_log(
             boost::log::keywords::file_name = "../logs/logFile_%N.log" ,
