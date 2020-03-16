@@ -42,7 +42,7 @@ void init_logs() {
 }
 
 void logs() {
-    srand(*(new int));
+    srand(time(nullptr));
     static unsigned int K(0);
 
     while (true) {
