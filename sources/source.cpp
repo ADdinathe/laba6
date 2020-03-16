@@ -20,16 +20,16 @@ using std::string;
 using std::size_t;
 using std::to_string;
 using std::rand;
-#define IDEAL ("0000");
+static const string IDEAL ("0000");
+
 
 static const int SIZE_ROTATION(5*1024*1024);
-static const int ZERO(0);
 void init_logs() {
     auto log = boost::log::add_file_log(
-            boost::log::keywords::file_name = "../logs/logFile_%N.log" ,
+            boost::log::keywords::file_name = "../logs/logFile_%N.log"  ,
             boost::log::keywords::rotation_size = SIZE_ROTATION,
             boost::log::keywords::time_based_rotation =
-                    boost::log::sinks::file::rotation_at_time_point{ ZERO, ZERO, ZERO },
+                    boost::log::sinks::file::rotation_at_time_point{ 0, 0, 0 },
             boost::log::keywords::format = "[%TimeStamp%]: %Message%");
 
     auto log2 = boost::log::add_console_log(
