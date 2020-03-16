@@ -73,5 +73,5 @@ int main(int argc, char* argv[]) {
     threads.resize(M); for (size_t i = 0; i < M; i++)
         threads[i] = new thread(logs);
     for (auto th : threads)	th->join();
-	return 0;
+    return 0;
 }
