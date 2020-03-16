@@ -5,6 +5,7 @@ files=`find ./sources ./tests ./include -name "*.cpp" -or -name "*.hpp" -or -nam
 filter=-build/c++11,-runtime/references,-whitespace/braces,-whitespace/indent,-whitespace/comments,-build/include_order
 echo $files | xargs cpplint --filter=$filter
 
+
 export CTEST_OUTPUT_ON_FAILURE=true
 # address sanitizer
 #CMAKE_LINKER_OPTS="-DCMAKE_EXE_LINKER='-fuse-ld=gold'"
