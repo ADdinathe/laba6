@@ -10,7 +10,7 @@
 #include <boost/log/utility/setup.hpp>
 
 
-#include "picosha2.h"
+#include <picosha2.h>
 
 using std::thread;
 using std::atoi;
@@ -50,9 +50,11 @@ void logs() {
         string s = to_string(R);
         string Crypted = picosha2::hash256_hex_string(s);
         if (Crypted.substr(Crypted.size() - IDEAL.size()) != IDEAL)
-            BOOST_LOG_TRIVIAL(trace) << "Non-positive result: " << Crypted << ", which result of " << s;
+            BOOST_LOG_TRIVIAL(trace) << "Non-positive result: "
+            << Crypted << ", which result of " << s;
         else
-            BOOST_LOG_TRIVIAL(info) << "Positive result: " << Crypted << ", which result of " << s;
+            BOOST_LOG_TRIVIAL(info) << "Positive result: "
+            << Crypted << ", which result of " << s;
     }
 }
 int main(int argc, char* argv[]) {
@@ -63,18 +65,13 @@ int main(int argc, char* argv[]) {
     if (M == 0 || M >= 12)
 
      M = thread::hardware_concurrency();
-
-
-	boost::log::register_simple_formatter_factory<boost::log::trivial::severity_level, char>("Severity");
-	init_logs();
-	boost::log::add_common_attributes();
-	BOOST_LOG_TRIVIAL(trace) << "Threads amount: " << M;
-	vector<thread*> threads;
-	threads.resize(M);
-	for (size_t i = 0; i < M; i++)
-		threads[i] = new thread(logs);
-	for (auto th : threads)
-		th->join();
+    boost::log::register_simple_formatter_factory<
+    boost::log::trivial::severity_level, char>("Severity");
+    init_logs(); boost::log::add_common_attributes();
+    BOOST_LOG_TRIVIAL(trace) << "Threads amount: " << M;
+    vector<thread*> threads;
+    threads.resize(M); for (size_t i = 0; i < M; i++)
+        threads[i] = new thread(logs);
+    for (auto th : threads)	th->join();
 	return 0;
 }
-
